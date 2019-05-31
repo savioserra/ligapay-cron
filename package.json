@@ -1,0 +1,29 @@
+{
+  "name": "ligapay-cron",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/savioserra/ligapay-cron.git",
+  "author": "Sávio Serra <serra.santos.s@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.2.0",
+    "@types/lodash": "^4.14.133",
+    "@types/node": "^12.0.4",
+    "prettier": "^1.17.1",
+    "prettier-tslint": "^0.4.2",
+    "ts-node": "^8.2.0",
+    "ts-node-dev": "^1.0.0-pre.39",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "graphql": "^14.3.1",
+    "lodash": "^4.17.11",
+    "prisma-binding": "^2.3.11"
+  }
+}
