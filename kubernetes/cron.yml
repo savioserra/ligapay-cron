@@ -1,0 +1,37 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ligapay-cron
+  namespace: ligapay
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ligapay-score-cron
+              image: gcr.io/makeit-241622/ligapay-cron
+              env:
+                - name: PRISMA_SERVER_ENDPOINT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: PRISMA_SERVER_ENDPOINT
+                      name: ligapay-backend-config
+                - name: APP_NAME
+                  valueFrom:
+                    configMapKeyRef:
+                      key: APP_NAME
+                      name: ligapay-backend-config
+                - name: STAGE
+                  valueFrom:
+                    configMapKeyRef:
+                      key: STAGE
+                      name: ligapay-backend-config
+                - name: APP_SECRET
+                  valueFrom:
+                    configMapKeyRef:
+                      key: APP_SECRET
+                      name: ligapay-backend-config
+
+          restartPolicy: OnFailure
