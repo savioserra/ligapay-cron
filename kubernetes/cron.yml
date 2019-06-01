@@ -5,6 +5,8 @@ metadata:
   namespace: ligapay
 spec:
   schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
@@ -12,6 +14,10 @@ spec:
           containers:
             - name: ligapay-score-cron
               image: gcr.io/makeit-241622/ligapay-cron
+
+              command: ["yarn"]
+              args: ["update-scores"]
+
               env:
                 - name: PRISMA_SERVER_ENDPOINT
                   valueFrom:

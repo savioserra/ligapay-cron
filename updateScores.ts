@@ -3,13 +3,18 @@ import { appSecret, endpoint } from "./src/utils";
 import { getCurrentRound, getTeamScores } from "./src/api/cartola";
 import { differenceBy } from "lodash";
 
-const prisma = new Prisma({
-  endpoint,
-  secret: appSecret
-});
-
 const main = async () => {
+  const prisma = new Prisma({
+    endpoint,
+    secret: appSecret
+  });
+
   const currentRound = await getCurrentRound();
+
+  if (!currentRound) {
+    return;
+  }
+  
   const [currentSeason] = await prisma.query.seasons({ where: { current: true } });
 
   const teams = await prisma.query.teams(
@@ -21,7 +26,14 @@ const main = async () => {
     const cartolaScores = await getTeamScores(cartolaSlug);
     const missingRounds = differenceBy(cartolaScores, scores, "round");
 
-    await prisma.mutation.updateTeam({ where: { id }, data: { scores: { create: missingRounds.map(r => ({ ...r, season: { connect: { id: currentSeason.id } } })) } } });
+    await prisma.mutation.updateTeam({
+      where: { id },
+      data: {
+        scores: {
+          create: missingRounds.map(r => ({ ...r, season: { connect: { id: currentSeason.id } } }))
+        }
+      }
+    });
   }
 
   if (currentSeason.currentRound !== currentRound) {
@@ -29,4 +41,4 @@ const main = async () => {
   }
 };
 
-main();
+main().catch(err => console.error(err));

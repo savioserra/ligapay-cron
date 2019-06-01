@@ -4,5 +4,3 @@ WORKDIR /ligapay-cron
 
 COPY . ./
 RUN yarn
-
-CMD [ "yarn", "start" ]

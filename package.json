@@ -6,7 +6,7 @@
   "author": "Sávio Serra <serra.santos.s@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node index.ts"
+    "update-scores": "ts-node updateScores.ts"
   },
   "devDependencies": {
     "@types/graphql": "^14.2.0",
