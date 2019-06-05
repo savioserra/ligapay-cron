@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
             - name: ligapay-score-cron
-              image: gcr.io/makeit-241622/ligapay-cron
+              image: gcr.io/makeit-241622/ligapay-cron:latest
 
               command: ["yarn"]
               args: ["update-scores"]

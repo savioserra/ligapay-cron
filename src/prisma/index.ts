@@ -13,6 +13,7 @@ export interface Query {
     teams: <T = Array<Team | null>>(args: { where?: TeamWhereInput | null, orderBy?: TeamOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     transactions: <T = Array<Transaction | null>>(args: { where?: TransactionWhereInput | null, orderBy?: TransactionOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     wallets: <T = Array<Wallet | null>>(args: { where?: WalletWhereInput | null, orderBy?: WalletOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    cards: <T = Array<Card | null>>(args: { where?: CardWhereInput | null, orderBy?: CardOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     leagueEnrollments: <T = Array<LeagueEnrollment | null>>(args: { where?: LeagueEnrollmentWhereInput | null, orderBy?: LeagueEnrollmentOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     league: <T = League | null>(args: { where: LeagueWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -23,6 +24,7 @@ export interface Query {
     team: <T = Team | null>(args: { where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     transaction: <T = Transaction | null>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     wallet: <T = Wallet | null>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    card: <T = Card | null>(args: { where: CardWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     leagueEnrollment: <T = LeagueEnrollment | null>(args: { where: LeagueEnrollmentWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     leaguesConnection: <T = LeagueConnection>(args: { where?: LeagueWhereInput | null, orderBy?: LeagueOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -33,6 +35,7 @@ export interface Query {
     teamsConnection: <T = TeamConnection>(args: { where?: TeamWhereInput | null, orderBy?: TeamOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     transactionsConnection: <T = TransactionConnection>(args: { where?: TransactionWhereInput | null, orderBy?: TransactionOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     walletsConnection: <T = WalletConnection>(args: { where?: WalletWhereInput | null, orderBy?: WalletOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    cardsConnection: <T = CardConnection>(args: { where?: CardWhereInput | null, orderBy?: CardOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     leagueEnrollmentsConnection: <T = LeagueEnrollmentConnection>(args: { where?: LeagueEnrollmentWhereInput | null, orderBy?: LeagueEnrollmentOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
@@ -47,6 +50,7 @@ export interface Mutation {
     createTeam: <T = Team>(args: { data: TeamCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createTransaction: <T = Transaction>(args: { data: TransactionCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createWallet: <T = Wallet>(args: { data: WalletCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createCard: <T = Card>(args: { data: CardCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createLeagueEnrollment: <T = LeagueEnrollment>(args: { data: LeagueEnrollmentCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateLeague: <T = League | null>(args: { data: LeagueUpdateInput, where: LeagueWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -57,6 +61,7 @@ export interface Mutation {
     updateTeam: <T = Team | null>(args: { data: TeamUpdateInput, where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateTransaction: <T = Transaction | null>(args: { data: TransactionUpdateInput, where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateWallet: <T = Wallet | null>(args: { data: WalletUpdateInput, where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateCard: <T = Card | null>(args: { data: CardUpdateInput, where: CardWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateLeagueEnrollment: <T = LeagueEnrollment | null>(args: { data: LeagueEnrollmentUpdateInput, where: LeagueEnrollmentWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteLeague: <T = League | null>(args: { where: LeagueWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -67,6 +72,7 @@ export interface Mutation {
     deleteTeam: <T = Team | null>(args: { where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteTransaction: <T = Transaction | null>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteWallet: <T = Wallet | null>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteCard: <T = Card | null>(args: { where: CardWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteLeagueEnrollment: <T = LeagueEnrollment | null>(args: { where: LeagueEnrollmentWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertLeague: <T = League>(args: { where: LeagueWhereUniqueInput, create: LeagueCreateInput, update: LeagueUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -77,6 +83,7 @@ export interface Mutation {
     upsertTeam: <T = Team>(args: { where: TeamWhereUniqueInput, create: TeamCreateInput, update: TeamUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTransaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput, create: TransactionCreateInput, update: TransactionUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertWallet: <T = Wallet>(args: { where: WalletWhereUniqueInput, create: WalletCreateInput, update: WalletUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertCard: <T = Card>(args: { where: CardWhereUniqueInput, create: CardCreateInput, update: CardUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertLeagueEnrollment: <T = LeagueEnrollment>(args: { where: LeagueEnrollmentWhereUniqueInput, create: LeagueEnrollmentCreateInput, update: LeagueEnrollmentUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyLeagues: <T = BatchPayload>(args: { data: LeagueUpdateManyMutationInput, where?: LeagueWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -87,6 +94,7 @@ export interface Mutation {
     updateManyTeams: <T = BatchPayload>(args: { data: TeamUpdateManyMutationInput, where?: TeamWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyTransactions: <T = BatchPayload>(args: { data: TransactionUpdateManyMutationInput, where?: TransactionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyWallets: <T = BatchPayload>(args: { data: WalletUpdateManyMutationInput, where?: WalletWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyCards: <T = BatchPayload>(args: { data: CardUpdateManyMutationInput, where?: CardWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyLeagues: <T = BatchPayload>(args: { where?: LeagueWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyLeagueTypes: <T = BatchPayload>(args: { where?: LeagueTypeWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -96,6 +104,7 @@ export interface Mutation {
     deleteManyTeams: <T = BatchPayload>(args: { where?: TeamWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyTransactions: <T = BatchPayload>(args: { where?: TransactionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyWallets: <T = BatchPayload>(args: { where?: WalletWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyCards: <T = BatchPayload>(args: { where?: CardWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyLeagueEnrollments: <T = BatchPayload>(args: { where?: LeagueEnrollmentWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     executeRaw: <T = Json>(args: { database?: PrismaDatabase | null, query: String }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
@@ -110,6 +119,7 @@ export interface Subscription {
     team: <T = TeamSubscriptionPayload | null>(args: { where?: TeamSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     transaction: <T = TransactionSubscriptionPayload | null>(args: { where?: TransactionSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     wallet: <T = WalletSubscriptionPayload | null>(args: { where?: WalletSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    card: <T = CardSubscriptionPayload | null>(args: { where?: CardSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     leagueEnrollment: <T = LeagueEnrollmentSubscriptionPayload | null>(args: { where?: LeagueEnrollmentSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
@@ -123,6 +133,7 @@ export interface Exists {
   Team: (where?: TeamWhereInput) => Promise<boolean>
   Transaction: (where?: TransactionWhereInput) => Promise<boolean>
   Wallet: (where?: WalletWhereInput) => Promise<boolean>
+  Card: (where?: CardWhereInput) => Promise<boolean>
   LeagueEnrollment: (where?: LeagueEnrollmentWhereInput) => Promise<boolean>
 }
 
@@ -148,7 +159,11 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateLeague {
+const typeDefs = `type AggregateCard {
+  count: Int!
+}
+
+type AggregateLeague {
   count: Int!
 }
 
@@ -191,6 +206,826 @@ type AggregateWallet {
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type Card {
+  id: UUID!
+  pagarmeId: String!
+  brand: String!
+  holderName: String!
+  firstDigits: String!
+  lastDigits: String!
+  fingerprint: String!
+  valid: Boolean!
+  expirationDate: String!
+  user: User!
+}
+
+"""A connection to a list of items."""
+type CardConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CardEdge]!
+  aggregate: AggregateCard!
+}
+
+input CardCreateInput {
+  id: UUID
+  pagarmeId: String!
+  brand: String!
+  holderName: String!
+  firstDigits: String!
+  lastDigits: String!
+  fingerprint: String!
+  valid: Boolean!
+  expirationDate: String!
+  user: UserCreateOneWithoutCardsInput!
+}
+
+input CardCreateManyWithoutUserInput {
+  create: [CardCreateWithoutUserInput!]
+  connect: [CardWhereUniqueInput!]
+}
+
+input CardCreateWithoutUserInput {
+  id: UUID
+  pagarmeId: String!
+  brand: String!
+  holderName: String!
+  firstDigits: String!
+  lastDigits: String!
+  fingerprint: String!
+  valid: Boolean!
+  expirationDate: String!
+}
+
+"""An edge in a connection."""
+type CardEdge {
+  """The item at the end of the edge."""
+  node: Card!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CardOrderByInput {
+  id_ASC
+  id_DESC
+  pagarmeId_ASC
+  pagarmeId_DESC
+  brand_ASC
+  brand_DESC
+  holderName_ASC
+  holderName_DESC
+  firstDigits_ASC
+  firstDigits_DESC
+  lastDigits_ASC
+  lastDigits_DESC
+  fingerprint_ASC
+  fingerprint_DESC
+  valid_ASC
+  valid_DESC
+  expirationDate_ASC
+  expirationDate_DESC
+}
+
+type CardPreviousValues {
+  id: UUID!
+  pagarmeId: String!
+  brand: String!
+  holderName: String!
+  firstDigits: String!
+  lastDigits: String!
+  fingerprint: String!
+  valid: Boolean!
+  expirationDate: String!
+}
+
+input CardScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardScalarWhereInput!]
+  id: UUID
+
+  """All values that are not equal to given value."""
+  id_not: UUID
+
+  """All values that are contained in given list."""
+  id_in: [UUID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [UUID!]
+  pagarmeId: String
+
+  """All values that are not equal to given value."""
+  pagarmeId_not: String
+
+  """All values that are contained in given list."""
+  pagarmeId_in: [String!]
+
+  """All values that are not contained in given list."""
+  pagarmeId_not_in: [String!]
+
+  """All values less than the given value."""
+  pagarmeId_lt: String
+
+  """All values less than or equal the given value."""
+  pagarmeId_lte: String
+
+  """All values greater than the given value."""
+  pagarmeId_gt: String
+
+  """All values greater than or equal the given value."""
+  pagarmeId_gte: String
+
+  """All values containing the given string."""
+  pagarmeId_contains: String
+
+  """All values not containing the given string."""
+  pagarmeId_not_contains: String
+
+  """All values starting with the given string."""
+  pagarmeId_starts_with: String
+
+  """All values not starting with the given string."""
+  pagarmeId_not_starts_with: String
+
+  """All values ending with the given string."""
+  pagarmeId_ends_with: String
+
+  """All values not ending with the given string."""
+  pagarmeId_not_ends_with: String
+  brand: String
+
+  """All values that are not equal to given value."""
+  brand_not: String
+
+  """All values that are contained in given list."""
+  brand_in: [String!]
+
+  """All values that are not contained in given list."""
+  brand_not_in: [String!]
+
+  """All values less than the given value."""
+  brand_lt: String
+
+  """All values less than or equal the given value."""
+  brand_lte: String
+
+  """All values greater than the given value."""
+  brand_gt: String
+
+  """All values greater than or equal the given value."""
+  brand_gte: String
+
+  """All values containing the given string."""
+  brand_contains: String
+
+  """All values not containing the given string."""
+  brand_not_contains: String
+
+  """All values starting with the given string."""
+  brand_starts_with: String
+
+  """All values not starting with the given string."""
+  brand_not_starts_with: String
+
+  """All values ending with the given string."""
+  brand_ends_with: String
+
+  """All values not ending with the given string."""
+  brand_not_ends_with: String
+  holderName: String
+
+  """All values that are not equal to given value."""
+  holderName_not: String
+
+  """All values that are contained in given list."""
+  holderName_in: [String!]
+
+  """All values that are not contained in given list."""
+  holderName_not_in: [String!]
+
+  """All values less than the given value."""
+  holderName_lt: String
+
+  """All values less than or equal the given value."""
+  holderName_lte: String
+
+  """All values greater than the given value."""
+  holderName_gt: String
+
+  """All values greater than or equal the given value."""
+  holderName_gte: String
+
+  """All values containing the given string."""
+  holderName_contains: String
+
+  """All values not containing the given string."""
+  holderName_not_contains: String
+
+  """All values starting with the given string."""
+  holderName_starts_with: String
+
+  """All values not starting with the given string."""
+  holderName_not_starts_with: String
+
+  """All values ending with the given string."""
+  holderName_ends_with: String
+
+  """All values not ending with the given string."""
+  holderName_not_ends_with: String
+  firstDigits: String
+
+  """All values that are not equal to given value."""
+  firstDigits_not: String
+
+  """All values that are contained in given list."""
+  firstDigits_in: [String!]
+
+  """All values that are not contained in given list."""
+  firstDigits_not_in: [String!]
+
+  """All values less than the given value."""
+  firstDigits_lt: String
+
+  """All values less than or equal the given value."""
+  firstDigits_lte: String
+
+  """All values greater than the given value."""
+  firstDigits_gt: String
+
+  """All values greater than or equal the given value."""
+  firstDigits_gte: String
+
+  """All values containing the given string."""
+  firstDigits_contains: String
+
+  """All values not containing the given string."""
+  firstDigits_not_contains: String
+
+  """All values starting with the given string."""
+  firstDigits_starts_with: String
+
+  """All values not starting with the given string."""
+  firstDigits_not_starts_with: String
+
+  """All values ending with the given string."""
+  firstDigits_ends_with: String
+
+  """All values not ending with the given string."""
+  firstDigits_not_ends_with: String
+  lastDigits: String
+
+  """All values that are not equal to given value."""
+  lastDigits_not: String
+
+  """All values that are contained in given list."""
+  lastDigits_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastDigits_not_in: [String!]
+
+  """All values less than the given value."""
+  lastDigits_lt: String
+
+  """All values less than or equal the given value."""
+  lastDigits_lte: String
+
+  """All values greater than the given value."""
+  lastDigits_gt: String
+
+  """All values greater than or equal the given value."""
+  lastDigits_gte: String
+
+  """All values containing the given string."""
+  lastDigits_contains: String
+
+  """All values not containing the given string."""
+  lastDigits_not_contains: String
+
+  """All values starting with the given string."""
+  lastDigits_starts_with: String
+
+  """All values not starting with the given string."""
+  lastDigits_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastDigits_ends_with: String
+
+  """All values not ending with the given string."""
+  lastDigits_not_ends_with: String
+  fingerprint: String
+
+  """All values that are not equal to given value."""
+  fingerprint_not: String
+
+  """All values that are contained in given list."""
+  fingerprint_in: [String!]
+
+  """All values that are not contained in given list."""
+  fingerprint_not_in: [String!]
+
+  """All values less than the given value."""
+  fingerprint_lt: String
+
+  """All values less than or equal the given value."""
+  fingerprint_lte: String
+
+  """All values greater than the given value."""
+  fingerprint_gt: String
+
+  """All values greater than or equal the given value."""
+  fingerprint_gte: String
+
+  """All values containing the given string."""
+  fingerprint_contains: String
+
+  """All values not containing the given string."""
+  fingerprint_not_contains: String
+
+  """All values starting with the given string."""
+  fingerprint_starts_with: String
+
+  """All values not starting with the given string."""
+  fingerprint_not_starts_with: String
+
+  """All values ending with the given string."""
+  fingerprint_ends_with: String
+
+  """All values not ending with the given string."""
+  fingerprint_not_ends_with: String
+  valid: Boolean
+
+  """All values that are not equal to given value."""
+  valid_not: Boolean
+  expirationDate: String
+
+  """All values that are not equal to given value."""
+  expirationDate_not: String
+
+  """All values that are contained in given list."""
+  expirationDate_in: [String!]
+
+  """All values that are not contained in given list."""
+  expirationDate_not_in: [String!]
+
+  """All values less than the given value."""
+  expirationDate_lt: String
+
+  """All values less than or equal the given value."""
+  expirationDate_lte: String
+
+  """All values greater than the given value."""
+  expirationDate_gt: String
+
+  """All values greater than or equal the given value."""
+  expirationDate_gte: String
+
+  """All values containing the given string."""
+  expirationDate_contains: String
+
+  """All values not containing the given string."""
+  expirationDate_not_contains: String
+
+  """All values starting with the given string."""
+  expirationDate_starts_with: String
+
+  """All values not starting with the given string."""
+  expirationDate_not_starts_with: String
+
+  """All values ending with the given string."""
+  expirationDate_ends_with: String
+
+  """All values not ending with the given string."""
+  expirationDate_not_ends_with: String
+}
+
+type CardSubscriptionPayload {
+  mutation: MutationType!
+  node: Card
+  updatedFields: [String!]
+  previousValues: CardPreviousValues
+}
+
+input CardSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CardWhereInput
+}
+
+input CardUpdateInput {
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+  user: UserUpdateOneRequiredWithoutCardsInput
+}
+
+input CardUpdateManyDataInput {
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+}
+
+input CardUpdateManyMutationInput {
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+}
+
+input CardUpdateManyWithoutUserInput {
+  create: [CardCreateWithoutUserInput!]
+  connect: [CardWhereUniqueInput!]
+  set: [CardWhereUniqueInput!]
+  disconnect: [CardWhereUniqueInput!]
+  delete: [CardWhereUniqueInput!]
+  update: [CardUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CardUpdateManyWithWhereNestedInput!]
+  deleteMany: [CardScalarWhereInput!]
+  upsert: [CardUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CardUpdateManyWithWhereNestedInput {
+  where: CardScalarWhereInput!
+  data: CardUpdateManyDataInput!
+}
+
+input CardUpdateWithoutUserDataInput {
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+}
+
+input CardUpdateWithWhereUniqueWithoutUserInput {
+  where: CardWhereUniqueInput!
+  data: CardUpdateWithoutUserDataInput!
+}
+
+input CardUpsertWithWhereUniqueWithoutUserInput {
+  where: CardWhereUniqueInput!
+  update: CardUpdateWithoutUserDataInput!
+  create: CardCreateWithoutUserInput!
+}
+
+input CardWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardWhereInput!]
+  id: UUID
+
+  """All values that are not equal to given value."""
+  id_not: UUID
+
+  """All values that are contained in given list."""
+  id_in: [UUID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [UUID!]
+  pagarmeId: String
+
+  """All values that are not equal to given value."""
+  pagarmeId_not: String
+
+  """All values that are contained in given list."""
+  pagarmeId_in: [String!]
+
+  """All values that are not contained in given list."""
+  pagarmeId_not_in: [String!]
+
+  """All values less than the given value."""
+  pagarmeId_lt: String
+
+  """All values less than or equal the given value."""
+  pagarmeId_lte: String
+
+  """All values greater than the given value."""
+  pagarmeId_gt: String
+
+  """All values greater than or equal the given value."""
+  pagarmeId_gte: String
+
+  """All values containing the given string."""
+  pagarmeId_contains: String
+
+  """All values not containing the given string."""
+  pagarmeId_not_contains: String
+
+  """All values starting with the given string."""
+  pagarmeId_starts_with: String
+
+  """All values not starting with the given string."""
+  pagarmeId_not_starts_with: String
+
+  """All values ending with the given string."""
+  pagarmeId_ends_with: String
+
+  """All values not ending with the given string."""
+  pagarmeId_not_ends_with: String
+  brand: String
+
+  """All values that are not equal to given value."""
+  brand_not: String
+
+  """All values that are contained in given list."""
+  brand_in: [String!]
+
+  """All values that are not contained in given list."""
+  brand_not_in: [String!]
+
+  """All values less than the given value."""
+  brand_lt: String
+
+  """All values less than or equal the given value."""
+  brand_lte: String
+
+  """All values greater than the given value."""
+  brand_gt: String
+
+  """All values greater than or equal the given value."""
+  brand_gte: String
+
+  """All values containing the given string."""
+  brand_contains: String
+
+  """All values not containing the given string."""
+  brand_not_contains: String
+
+  """All values starting with the given string."""
+  brand_starts_with: String
+
+  """All values not starting with the given string."""
+  brand_not_starts_with: String
+
+  """All values ending with the given string."""
+  brand_ends_with: String
+
+  """All values not ending with the given string."""
+  brand_not_ends_with: String
+  holderName: String
+
+  """All values that are not equal to given value."""
+  holderName_not: String
+
+  """All values that are contained in given list."""
+  holderName_in: [String!]
+
+  """All values that are not contained in given list."""
+  holderName_not_in: [String!]
+
+  """All values less than the given value."""
+  holderName_lt: String
+
+  """All values less than or equal the given value."""
+  holderName_lte: String
+
+  """All values greater than the given value."""
+  holderName_gt: String
+
+  """All values greater than or equal the given value."""
+  holderName_gte: String
+
+  """All values containing the given string."""
+  holderName_contains: String
+
+  """All values not containing the given string."""
+  holderName_not_contains: String
+
+  """All values starting with the given string."""
+  holderName_starts_with: String
+
+  """All values not starting with the given string."""
+  holderName_not_starts_with: String
+
+  """All values ending with the given string."""
+  holderName_ends_with: String
+
+  """All values not ending with the given string."""
+  holderName_not_ends_with: String
+  firstDigits: String
+
+  """All values that are not equal to given value."""
+  firstDigits_not: String
+
+  """All values that are contained in given list."""
+  firstDigits_in: [String!]
+
+  """All values that are not contained in given list."""
+  firstDigits_not_in: [String!]
+
+  """All values less than the given value."""
+  firstDigits_lt: String
+
+  """All values less than or equal the given value."""
+  firstDigits_lte: String
+
+  """All values greater than the given value."""
+  firstDigits_gt: String
+
+  """All values greater than or equal the given value."""
+  firstDigits_gte: String
+
+  """All values containing the given string."""
+  firstDigits_contains: String
+
+  """All values not containing the given string."""
+  firstDigits_not_contains: String
+
+  """All values starting with the given string."""
+  firstDigits_starts_with: String
+
+  """All values not starting with the given string."""
+  firstDigits_not_starts_with: String
+
+  """All values ending with the given string."""
+  firstDigits_ends_with: String
+
+  """All values not ending with the given string."""
+  firstDigits_not_ends_with: String
+  lastDigits: String
+
+  """All values that are not equal to given value."""
+  lastDigits_not: String
+
+  """All values that are contained in given list."""
+  lastDigits_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastDigits_not_in: [String!]
+
+  """All values less than the given value."""
+  lastDigits_lt: String
+
+  """All values less than or equal the given value."""
+  lastDigits_lte: String
+
+  """All values greater than the given value."""
+  lastDigits_gt: String
+
+  """All values greater than or equal the given value."""
+  lastDigits_gte: String
+
+  """All values containing the given string."""
+  lastDigits_contains: String
+
+  """All values not containing the given string."""
+  lastDigits_not_contains: String
+
+  """All values starting with the given string."""
+  lastDigits_starts_with: String
+
+  """All values not starting with the given string."""
+  lastDigits_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastDigits_ends_with: String
+
+  """All values not ending with the given string."""
+  lastDigits_not_ends_with: String
+  fingerprint: String
+
+  """All values that are not equal to given value."""
+  fingerprint_not: String
+
+  """All values that are contained in given list."""
+  fingerprint_in: [String!]
+
+  """All values that are not contained in given list."""
+  fingerprint_not_in: [String!]
+
+  """All values less than the given value."""
+  fingerprint_lt: String
+
+  """All values less than or equal the given value."""
+  fingerprint_lte: String
+
+  """All values greater than the given value."""
+  fingerprint_gt: String
+
+  """All values greater than or equal the given value."""
+  fingerprint_gte: String
+
+  """All values containing the given string."""
+  fingerprint_contains: String
+
+  """All values not containing the given string."""
+  fingerprint_not_contains: String
+
+  """All values starting with the given string."""
+  fingerprint_starts_with: String
+
+  """All values not starting with the given string."""
+  fingerprint_not_starts_with: String
+
+  """All values ending with the given string."""
+  fingerprint_ends_with: String
+
+  """All values not ending with the given string."""
+  fingerprint_not_ends_with: String
+  valid: Boolean
+
+  """All values that are not equal to given value."""
+  valid_not: Boolean
+  expirationDate: String
+
+  """All values that are not equal to given value."""
+  expirationDate_not: String
+
+  """All values that are contained in given list."""
+  expirationDate_in: [String!]
+
+  """All values that are not contained in given list."""
+  expirationDate_not_in: [String!]
+
+  """All values less than the given value."""
+  expirationDate_lt: String
+
+  """All values less than or equal the given value."""
+  expirationDate_lte: String
+
+  """All values greater than the given value."""
+  expirationDate_gt: String
+
+  """All values greater than or equal the given value."""
+  expirationDate_gte: String
+
+  """All values containing the given string."""
+  expirationDate_contains: String
+
+  """All values not containing the given string."""
+  expirationDate_not_contains: String
+
+  """All values starting with the given string."""
+  expirationDate_starts_with: String
+
+  """All values not starting with the given string."""
+  expirationDate_not_starts_with: String
+
+  """All values ending with the given string."""
+  expirationDate_ends_with: String
+
+  """All values not ending with the given string."""
+  expirationDate_not_ends_with: String
+  user: UserWhereInput
+}
+
+input CardWhereUniqueInput {
+  id: UUID
 }
 
 scalar DateTime
@@ -1651,6 +2486,7 @@ type Mutation {
   createTeam(data: TeamCreateInput!): Team!
   createTransaction(data: TransactionCreateInput!): Transaction!
   createWallet(data: WalletCreateInput!): Wallet!
+  createCard(data: CardCreateInput!): Card!
   createLeagueEnrollment(data: LeagueEnrollmentCreateInput!): LeagueEnrollment!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateLeague(data: LeagueUpdateInput!, where: LeagueWhereUniqueInput!): League
@@ -1661,6 +2497,7 @@ type Mutation {
   updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
   updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
   updateWallet(data: WalletUpdateInput!, where: WalletWhereUniqueInput!): Wallet
+  updateCard(data: CardUpdateInput!, where: CardWhereUniqueInput!): Card
   updateLeagueEnrollment(data: LeagueEnrollmentUpdateInput!, where: LeagueEnrollmentWhereUniqueInput!): LeagueEnrollment
   deleteUser(where: UserWhereUniqueInput!): User
   deleteLeague(where: LeagueWhereUniqueInput!): League
@@ -1671,6 +2508,7 @@ type Mutation {
   deleteTeam(where: TeamWhereUniqueInput!): Team
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteWallet(where: WalletWhereUniqueInput!): Wallet
+  deleteCard(where: CardWhereUniqueInput!): Card
   deleteLeagueEnrollment(where: LeagueEnrollmentWhereUniqueInput!): LeagueEnrollment
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertLeague(where: LeagueWhereUniqueInput!, create: LeagueCreateInput!, update: LeagueUpdateInput!): League!
@@ -1681,6 +2519,7 @@ type Mutation {
   upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
   upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
   upsertWallet(where: WalletWhereUniqueInput!, create: WalletCreateInput!, update: WalletUpdateInput!): Wallet!
+  upsertCard(where: CardWhereUniqueInput!, create: CardCreateInput!, update: CardUpdateInput!): Card!
   upsertLeagueEnrollment(where: LeagueEnrollmentWhereUniqueInput!, create: LeagueEnrollmentCreateInput!, update: LeagueEnrollmentUpdateInput!): LeagueEnrollment!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyLeagues(data: LeagueUpdateManyMutationInput!, where: LeagueWhereInput): BatchPayload!
@@ -1691,6 +2530,7 @@ type Mutation {
   updateManyTeams(data: TeamUpdateManyMutationInput!, where: TeamWhereInput): BatchPayload!
   updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
   updateManyWallets(data: WalletUpdateManyMutationInput!, where: WalletWhereInput): BatchPayload!
+  updateManyCards(data: CardUpdateManyMutationInput!, where: CardWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyLeagues(where: LeagueWhereInput): BatchPayload!
   deleteManyLeagueTypes(where: LeagueTypeWhereInput): BatchPayload!
@@ -1700,6 +2540,7 @@ type Mutation {
   deleteManyTeams(where: TeamWhereInput): BatchPayload!
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
   deleteManyWallets(where: WalletWhereInput): BatchPayload!
+  deleteManyCards(where: CardWhereInput): BatchPayload!
   deleteManyLeagueEnrollments(where: LeagueEnrollmentWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -1745,6 +2586,7 @@ type Query {
   teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
   wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet]!
+  cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card]!
   leagueEnrollments(where: LeagueEnrollmentWhereInput, orderBy: LeagueEnrollmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LeagueEnrollment]!
   user(where: UserWhereUniqueInput!): User
   league(where: LeagueWhereUniqueInput!): League
@@ -1755,6 +2597,7 @@ type Query {
   team(where: TeamWhereUniqueInput!): Team
   transaction(where: TransactionWhereUniqueInput!): Transaction
   wallet(where: WalletWhereUniqueInput!): Wallet
+  card(where: CardWhereUniqueInput!): Card
   leagueEnrollment(where: LeagueEnrollmentWhereUniqueInput!): LeagueEnrollment
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   leaguesConnection(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueConnection!
@@ -1765,6 +2608,7 @@ type Query {
   teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
   transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
   walletsConnection(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WalletConnection!
+  cardsConnection(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardConnection!
   leagueEnrollmentsConnection(where: LeagueEnrollmentWhereInput, orderBy: LeagueEnrollmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueEnrollmentConnection!
 
   """Fetches an object given its ID"""
@@ -2578,12 +3422,14 @@ type Subscription {
   team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
   transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
   wallet(where: WalletSubscriptionWhereInput): WalletSubscriptionPayload
+  card(where: CardSubscriptionWhereInput): CardSubscriptionPayload
   leagueEnrollment(where: LeagueEnrollmentSubscriptionWhereInput): LeagueEnrollmentSubscriptionPayload
 }
 
 type Team {
   id: UUID!
   name: String!
+  cartolaId: String!
   cartolaName: String!
   cartolaSlug: String!
   avatar: String
@@ -2608,6 +3454,7 @@ type TeamConnection {
 input TeamCreateInput {
   id: UUID
   name: String!
+  cartolaId: String!
   cartolaName: String!
   cartolaSlug: String!
   avatar: String
@@ -2635,6 +3482,7 @@ input TeamCreateOneWithoutScoresInput {
 input TeamCreateWithoutEnrollmentsInput {
   id: UUID
   name: String!
+  cartolaId: String!
   cartolaName: String!
   cartolaSlug: String!
   avatar: String
@@ -2646,6 +3494,7 @@ input TeamCreateWithoutEnrollmentsInput {
 input TeamCreateWithoutOwnerInput {
   id: UUID
   name: String!
+  cartolaId: String!
   cartolaName: String!
   cartolaSlug: String!
   avatar: String
@@ -2657,6 +3506,7 @@ input TeamCreateWithoutOwnerInput {
 input TeamCreateWithoutScoresInput {
   id: UUID
   name: String!
+  cartolaId: String!
   cartolaName: String!
   cartolaSlug: String!
   avatar: String
@@ -3007,6 +3857,8 @@ enum TeamOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  cartolaId_ASC
+  cartolaId_DESC
   cartolaName_ASC
   cartolaName_DESC
   cartolaSlug_ASC
@@ -3024,6 +3876,7 @@ enum TeamOrderByInput {
 type TeamPreviousValues {
   id: UUID!
   name: String!
+  cartolaId: String!
   cartolaName: String!
   cartolaSlug: String!
   avatar: String
@@ -3071,6 +3924,7 @@ input TeamSubscriptionWhereInput {
 
 input TeamUpdateInput {
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar: String
@@ -3082,6 +3936,7 @@ input TeamUpdateInput {
 
 input TeamUpdateManyMutationInput {
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar: String
@@ -3111,6 +3966,7 @@ input TeamUpdateOneRequiredWithoutScoresInput {
 
 input TeamUpdateWithoutEnrollmentsDataInput {
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar: String
@@ -3121,6 +3977,7 @@ input TeamUpdateWithoutEnrollmentsDataInput {
 
 input TeamUpdateWithoutOwnerDataInput {
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar: String
@@ -3131,6 +3988,7 @@ input TeamUpdateWithoutOwnerDataInput {
 
 input TeamUpdateWithoutScoresDataInput {
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar: String
@@ -3213,6 +4071,46 @@ input TeamWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  cartolaId: String
+
+  """All values that are not equal to given value."""
+  cartolaId_not: String
+
+  """All values that are contained in given list."""
+  cartolaId_in: [String!]
+
+  """All values that are not contained in given list."""
+  cartolaId_not_in: [String!]
+
+  """All values less than the given value."""
+  cartolaId_lt: String
+
+  """All values less than or equal the given value."""
+  cartolaId_lte: String
+
+  """All values greater than the given value."""
+  cartolaId_gt: String
+
+  """All values greater than or equal the given value."""
+  cartolaId_gte: String
+
+  """All values containing the given string."""
+  cartolaId_contains: String
+
+  """All values not containing the given string."""
+  cartolaId_not_contains: String
+
+  """All values starting with the given string."""
+  cartolaId_starts_with: String
+
+  """All values not starting with the given string."""
+  cartolaId_not_starts_with: String
+
+  """All values ending with the given string."""
+  cartolaId_ends_with: String
+
+  """All values not ending with the given string."""
+  cartolaId_not_ends_with: String
   cartolaName: String
 
   """All values that are not equal to given value."""
@@ -3772,6 +4670,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
+  cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card!]
 }
 
 """A connection to a list of items."""
@@ -3792,6 +4691,12 @@ input UserCreateInput {
   deleted: Boolean
   team: TeamCreateOneWithoutOwnerInput!
   wallet: WalletCreateOneWithoutUserInput!
+  cards: CardCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutCardsInput {
+  create: UserCreateWithoutCardsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutTeamInput {
@@ -3804,6 +4709,16 @@ input UserCreateOneWithoutWalletInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCardsInput {
+  id: UUID
+  email: String!
+  globoToken: String
+  password: String!
+  deleted: Boolean
+  team: TeamCreateOneWithoutOwnerInput!
+  wallet: WalletCreateOneWithoutUserInput!
+}
+
 input UserCreateWithoutTeamInput {
   id: UUID
   email: String!
@@ -3811,6 +4726,7 @@ input UserCreateWithoutTeamInput {
   password: String!
   deleted: Boolean
   wallet: WalletCreateOneWithoutUserInput!
+  cards: CardCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutWalletInput {
@@ -3820,6 +4736,7 @@ input UserCreateWithoutWalletInput {
   password: String!
   deleted: Boolean
   team: TeamCreateOneWithoutOwnerInput!
+  cards: CardCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -3902,6 +4819,7 @@ input UserUpdateInput {
   deleted: Boolean
   team: TeamUpdateOneRequiredWithoutOwnerInput
   wallet: WalletUpdateOneRequiredWithoutUserInput
+  cards: CardUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -3909,6 +4827,13 @@ input UserUpdateManyMutationInput {
   globoToken: String
   password: String
   deleted: Boolean
+}
+
+input UserUpdateOneRequiredWithoutCardsInput {
+  create: UserCreateWithoutCardsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutCardsDataInput
+  upsert: UserUpsertWithoutCardsInput
 }
 
 input UserUpdateOneRequiredWithoutTeamInput {
@@ -3927,12 +4852,22 @@ input UserUpdateOneWithoutWalletInput {
   upsert: UserUpsertWithoutWalletInput
 }
 
+input UserUpdateWithoutCardsDataInput {
+  email: String
+  globoToken: String
+  password: String
+  deleted: Boolean
+  team: TeamUpdateOneRequiredWithoutOwnerInput
+  wallet: WalletUpdateOneRequiredWithoutUserInput
+}
+
 input UserUpdateWithoutTeamDataInput {
   email: String
   globoToken: String
   password: String
   deleted: Boolean
   wallet: WalletUpdateOneRequiredWithoutUserInput
+  cards: CardUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutWalletDataInput {
@@ -3941,6 +4876,12 @@ input UserUpdateWithoutWalletDataInput {
   password: String
   deleted: Boolean
   team: TeamUpdateOneRequiredWithoutOwnerInput
+  cards: CardUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutCardsInput {
+  update: UserUpdateWithoutCardsDataInput!
+  create: UserCreateWithoutCardsInput!
 }
 
 input UserUpsertWithoutTeamInput {
@@ -4142,6 +5083,9 @@ input UserWhereInput {
   deleted_not: Boolean
   team: TeamWhereInput
   wallet: WalletWhereInput
+  cards_every: CardWhereInput
+  cards_some: CardWhereInput
+  cards_none: CardWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -4492,6 +5436,25 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
+export type CardOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'pagarmeId_ASC' |
+  'pagarmeId_DESC' |
+  'brand_ASC' |
+  'brand_DESC' |
+  'holderName_ASC' |
+  'holderName_DESC' |
+  'firstDigits_ASC' |
+  'firstDigits_DESC' |
+  'lastDigits_ASC' |
+  'lastDigits_DESC' |
+  'fingerprint_ASC' |
+  'fingerprint_DESC' |
+  'valid_ASC' |
+  'valid_DESC' |
+  'expirationDate_ASC' |
+  'expirationDate_DESC'
+
 export type LeagueEnrollmentOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
@@ -4578,6 +5541,8 @@ export type TeamOrderByInput =   'id_ASC' |
   'id_DESC' |
   'name_ASC' |
   'name_DESC' |
+  'cartolaId_ASC' |
+  'cartolaId_DESC' |
   'cartolaName_ASC' |
   'cartolaName_DESC' |
   'cartolaSlug_ASC' |
@@ -4623,6 +5588,345 @@ export type WalletOrderByInput =   'id_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC'
+
+export interface CardCreateInput {
+  id?: UUID | null
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+  user: UserCreateOneWithoutCardsInput
+}
+
+export interface CardCreateManyWithoutUserInput {
+  create?: CardCreateWithoutUserInput[] | CardCreateWithoutUserInput | null
+  connect?: CardWhereUniqueInput[] | CardWhereUniqueInput | null
+}
+
+export interface CardCreateWithoutUserInput {
+  id?: UUID | null
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+}
+
+export interface CardScalarWhereInput {
+  AND?: CardScalarWhereInput[] | CardScalarWhereInput | null
+  OR?: CardScalarWhereInput[] | CardScalarWhereInput | null
+  NOT?: CardScalarWhereInput[] | CardScalarWhereInput | null
+  id?: UUID | null
+  id_not?: UUID | null
+  id_in?: UUID[] | UUID | null
+  id_not_in?: UUID[] | UUID | null
+  pagarmeId?: String | null
+  pagarmeId_not?: String | null
+  pagarmeId_in?: String[] | String | null
+  pagarmeId_not_in?: String[] | String | null
+  pagarmeId_lt?: String | null
+  pagarmeId_lte?: String | null
+  pagarmeId_gt?: String | null
+  pagarmeId_gte?: String | null
+  pagarmeId_contains?: String | null
+  pagarmeId_not_contains?: String | null
+  pagarmeId_starts_with?: String | null
+  pagarmeId_not_starts_with?: String | null
+  pagarmeId_ends_with?: String | null
+  pagarmeId_not_ends_with?: String | null
+  brand?: String | null
+  brand_not?: String | null
+  brand_in?: String[] | String | null
+  brand_not_in?: String[] | String | null
+  brand_lt?: String | null
+  brand_lte?: String | null
+  brand_gt?: String | null
+  brand_gte?: String | null
+  brand_contains?: String | null
+  brand_not_contains?: String | null
+  brand_starts_with?: String | null
+  brand_not_starts_with?: String | null
+  brand_ends_with?: String | null
+  brand_not_ends_with?: String | null
+  holderName?: String | null
+  holderName_not?: String | null
+  holderName_in?: String[] | String | null
+  holderName_not_in?: String[] | String | null
+  holderName_lt?: String | null
+  holderName_lte?: String | null
+  holderName_gt?: String | null
+  holderName_gte?: String | null
+  holderName_contains?: String | null
+  holderName_not_contains?: String | null
+  holderName_starts_with?: String | null
+  holderName_not_starts_with?: String | null
+  holderName_ends_with?: String | null
+  holderName_not_ends_with?: String | null
+  firstDigits?: String | null
+  firstDigits_not?: String | null
+  firstDigits_in?: String[] | String | null
+  firstDigits_not_in?: String[] | String | null
+  firstDigits_lt?: String | null
+  firstDigits_lte?: String | null
+  firstDigits_gt?: String | null
+  firstDigits_gte?: String | null
+  firstDigits_contains?: String | null
+  firstDigits_not_contains?: String | null
+  firstDigits_starts_with?: String | null
+  firstDigits_not_starts_with?: String | null
+  firstDigits_ends_with?: String | null
+  firstDigits_not_ends_with?: String | null
+  lastDigits?: String | null
+  lastDigits_not?: String | null
+  lastDigits_in?: String[] | String | null
+  lastDigits_not_in?: String[] | String | null
+  lastDigits_lt?: String | null
+  lastDigits_lte?: String | null
+  lastDigits_gt?: String | null
+  lastDigits_gte?: String | null
+  lastDigits_contains?: String | null
+  lastDigits_not_contains?: String | null
+  lastDigits_starts_with?: String | null
+  lastDigits_not_starts_with?: String | null
+  lastDigits_ends_with?: String | null
+  lastDigits_not_ends_with?: String | null
+  fingerprint?: String | null
+  fingerprint_not?: String | null
+  fingerprint_in?: String[] | String | null
+  fingerprint_not_in?: String[] | String | null
+  fingerprint_lt?: String | null
+  fingerprint_lte?: String | null
+  fingerprint_gt?: String | null
+  fingerprint_gte?: String | null
+  fingerprint_contains?: String | null
+  fingerprint_not_contains?: String | null
+  fingerprint_starts_with?: String | null
+  fingerprint_not_starts_with?: String | null
+  fingerprint_ends_with?: String | null
+  fingerprint_not_ends_with?: String | null
+  valid?: Boolean | null
+  valid_not?: Boolean | null
+  expirationDate?: String | null
+  expirationDate_not?: String | null
+  expirationDate_in?: String[] | String | null
+  expirationDate_not_in?: String[] | String | null
+  expirationDate_lt?: String | null
+  expirationDate_lte?: String | null
+  expirationDate_gt?: String | null
+  expirationDate_gte?: String | null
+  expirationDate_contains?: String | null
+  expirationDate_not_contains?: String | null
+  expirationDate_starts_with?: String | null
+  expirationDate_not_starts_with?: String | null
+  expirationDate_ends_with?: String | null
+  expirationDate_not_ends_with?: String | null
+}
+
+export interface CardSubscriptionWhereInput {
+  AND?: CardSubscriptionWhereInput[] | CardSubscriptionWhereInput | null
+  OR?: CardSubscriptionWhereInput[] | CardSubscriptionWhereInput | null
+  NOT?: CardSubscriptionWhereInput[] | CardSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: CardWhereInput | null
+}
+
+export interface CardUpdateInput {
+  pagarmeId?: String | null
+  brand?: String | null
+  holderName?: String | null
+  firstDigits?: String | null
+  lastDigits?: String | null
+  fingerprint?: String | null
+  valid?: Boolean | null
+  expirationDate?: String | null
+  user?: UserUpdateOneRequiredWithoutCardsInput | null
+}
+
+export interface CardUpdateManyDataInput {
+  pagarmeId?: String | null
+  brand?: String | null
+  holderName?: String | null
+  firstDigits?: String | null
+  lastDigits?: String | null
+  fingerprint?: String | null
+  valid?: Boolean | null
+  expirationDate?: String | null
+}
+
+export interface CardUpdateManyMutationInput {
+  pagarmeId?: String | null
+  brand?: String | null
+  holderName?: String | null
+  firstDigits?: String | null
+  lastDigits?: String | null
+  fingerprint?: String | null
+  valid?: Boolean | null
+  expirationDate?: String | null
+}
+
+export interface CardUpdateManyWithoutUserInput {
+  create?: CardCreateWithoutUserInput[] | CardCreateWithoutUserInput | null
+  connect?: CardWhereUniqueInput[] | CardWhereUniqueInput | null
+  set?: CardWhereUniqueInput[] | CardWhereUniqueInput | null
+  disconnect?: CardWhereUniqueInput[] | CardWhereUniqueInput | null
+  delete?: CardWhereUniqueInput[] | CardWhereUniqueInput | null
+  update?: CardUpdateWithWhereUniqueWithoutUserInput[] | CardUpdateWithWhereUniqueWithoutUserInput | null
+  updateMany?: CardUpdateManyWithWhereNestedInput[] | CardUpdateManyWithWhereNestedInput | null
+  deleteMany?: CardScalarWhereInput[] | CardScalarWhereInput | null
+  upsert?: CardUpsertWithWhereUniqueWithoutUserInput[] | CardUpsertWithWhereUniqueWithoutUserInput | null
+}
+
+export interface CardUpdateManyWithWhereNestedInput {
+  where: CardScalarWhereInput
+  data: CardUpdateManyDataInput
+}
+
+export interface CardUpdateWithoutUserDataInput {
+  pagarmeId?: String | null
+  brand?: String | null
+  holderName?: String | null
+  firstDigits?: String | null
+  lastDigits?: String | null
+  fingerprint?: String | null
+  valid?: Boolean | null
+  expirationDate?: String | null
+}
+
+export interface CardUpdateWithWhereUniqueWithoutUserInput {
+  where: CardWhereUniqueInput
+  data: CardUpdateWithoutUserDataInput
+}
+
+export interface CardUpsertWithWhereUniqueWithoutUserInput {
+  where: CardWhereUniqueInput
+  update: CardUpdateWithoutUserDataInput
+  create: CardCreateWithoutUserInput
+}
+
+export interface CardWhereInput {
+  AND?: CardWhereInput[] | CardWhereInput | null
+  OR?: CardWhereInput[] | CardWhereInput | null
+  NOT?: CardWhereInput[] | CardWhereInput | null
+  id?: UUID | null
+  id_not?: UUID | null
+  id_in?: UUID[] | UUID | null
+  id_not_in?: UUID[] | UUID | null
+  pagarmeId?: String | null
+  pagarmeId_not?: String | null
+  pagarmeId_in?: String[] | String | null
+  pagarmeId_not_in?: String[] | String | null
+  pagarmeId_lt?: String | null
+  pagarmeId_lte?: String | null
+  pagarmeId_gt?: String | null
+  pagarmeId_gte?: String | null
+  pagarmeId_contains?: String | null
+  pagarmeId_not_contains?: String | null
+  pagarmeId_starts_with?: String | null
+  pagarmeId_not_starts_with?: String | null
+  pagarmeId_ends_with?: String | null
+  pagarmeId_not_ends_with?: String | null
+  brand?: String | null
+  brand_not?: String | null
+  brand_in?: String[] | String | null
+  brand_not_in?: String[] | String | null
+  brand_lt?: String | null
+  brand_lte?: String | null
+  brand_gt?: String | null
+  brand_gte?: String | null
+  brand_contains?: String | null
+  brand_not_contains?: String | null
+  brand_starts_with?: String | null
+  brand_not_starts_with?: String | null
+  brand_ends_with?: String | null
+  brand_not_ends_with?: String | null
+  holderName?: String | null
+  holderName_not?: String | null
+  holderName_in?: String[] | String | null
+  holderName_not_in?: String[] | String | null
+  holderName_lt?: String | null
+  holderName_lte?: String | null
+  holderName_gt?: String | null
+  holderName_gte?: String | null
+  holderName_contains?: String | null
+  holderName_not_contains?: String | null
+  holderName_starts_with?: String | null
+  holderName_not_starts_with?: String | null
+  holderName_ends_with?: String | null
+  holderName_not_ends_with?: String | null
+  firstDigits?: String | null
+  firstDigits_not?: String | null
+  firstDigits_in?: String[] | String | null
+  firstDigits_not_in?: String[] | String | null
+  firstDigits_lt?: String | null
+  firstDigits_lte?: String | null
+  firstDigits_gt?: String | null
+  firstDigits_gte?: String | null
+  firstDigits_contains?: String | null
+  firstDigits_not_contains?: String | null
+  firstDigits_starts_with?: String | null
+  firstDigits_not_starts_with?: String | null
+  firstDigits_ends_with?: String | null
+  firstDigits_not_ends_with?: String | null
+  lastDigits?: String | null
+  lastDigits_not?: String | null
+  lastDigits_in?: String[] | String | null
+  lastDigits_not_in?: String[] | String | null
+  lastDigits_lt?: String | null
+  lastDigits_lte?: String | null
+  lastDigits_gt?: String | null
+  lastDigits_gte?: String | null
+  lastDigits_contains?: String | null
+  lastDigits_not_contains?: String | null
+  lastDigits_starts_with?: String | null
+  lastDigits_not_starts_with?: String | null
+  lastDigits_ends_with?: String | null
+  lastDigits_not_ends_with?: String | null
+  fingerprint?: String | null
+  fingerprint_not?: String | null
+  fingerprint_in?: String[] | String | null
+  fingerprint_not_in?: String[] | String | null
+  fingerprint_lt?: String | null
+  fingerprint_lte?: String | null
+  fingerprint_gt?: String | null
+  fingerprint_gte?: String | null
+  fingerprint_contains?: String | null
+  fingerprint_not_contains?: String | null
+  fingerprint_starts_with?: String | null
+  fingerprint_not_starts_with?: String | null
+  fingerprint_ends_with?: String | null
+  fingerprint_not_ends_with?: String | null
+  valid?: Boolean | null
+  valid_not?: Boolean | null
+  expirationDate?: String | null
+  expirationDate_not?: String | null
+  expirationDate_in?: String[] | String | null
+  expirationDate_not_in?: String[] | String | null
+  expirationDate_lt?: String | null
+  expirationDate_lte?: String | null
+  expirationDate_gt?: String | null
+  expirationDate_gte?: String | null
+  expirationDate_contains?: String | null
+  expirationDate_not_contains?: String | null
+  expirationDate_starts_with?: String | null
+  expirationDate_not_starts_with?: String | null
+  expirationDate_ends_with?: String | null
+  expirationDate_not_ends_with?: String | null
+  user?: UserWhereInput | null
+}
+
+export interface CardWhereUniqueInput {
+  id?: UUID | null
+}
 
 export interface LeagueCreateInput {
   id?: UUID | null
@@ -5720,6 +7024,7 @@ export interface SeasonWhereUniqueInput {
 export interface TeamCreateInput {
   id?: UUID | null
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar?: String | null
@@ -5747,6 +7052,7 @@ export interface TeamCreateOneWithoutScoresInput {
 export interface TeamCreateWithoutEnrollmentsInput {
   id?: UUID | null
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar?: String | null
@@ -5758,6 +7064,7 @@ export interface TeamCreateWithoutEnrollmentsInput {
 export interface TeamCreateWithoutOwnerInput {
   id?: UUID | null
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar?: String | null
@@ -5769,6 +7076,7 @@ export interface TeamCreateWithoutOwnerInput {
 export interface TeamCreateWithoutScoresInput {
   id?: UUID | null
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar?: String | null
@@ -5940,6 +7248,7 @@ export interface TeamSubscriptionWhereInput {
 
 export interface TeamUpdateInput {
   name?: String | null
+  cartolaId?: String | null
   cartolaName?: String | null
   cartolaSlug?: String | null
   avatar?: String | null
@@ -5951,6 +7260,7 @@ export interface TeamUpdateInput {
 
 export interface TeamUpdateManyMutationInput {
   name?: String | null
+  cartolaId?: String | null
   cartolaName?: String | null
   cartolaSlug?: String | null
   avatar?: String | null
@@ -5980,6 +7290,7 @@ export interface TeamUpdateOneRequiredWithoutScoresInput {
 
 export interface TeamUpdateWithoutEnrollmentsDataInput {
   name?: String | null
+  cartolaId?: String | null
   cartolaName?: String | null
   cartolaSlug?: String | null
   avatar?: String | null
@@ -5990,6 +7301,7 @@ export interface TeamUpdateWithoutEnrollmentsDataInput {
 
 export interface TeamUpdateWithoutOwnerDataInput {
   name?: String | null
+  cartolaId?: String | null
   cartolaName?: String | null
   cartolaSlug?: String | null
   avatar?: String | null
@@ -6000,6 +7312,7 @@ export interface TeamUpdateWithoutOwnerDataInput {
 
 export interface TeamUpdateWithoutScoresDataInput {
   name?: String | null
+  cartolaId?: String | null
   cartolaName?: String | null
   cartolaSlug?: String | null
   avatar?: String | null
@@ -6045,6 +7358,20 @@ export interface TeamWhereInput {
   name_not_starts_with?: String | null
   name_ends_with?: String | null
   name_not_ends_with?: String | null
+  cartolaId?: String | null
+  cartolaId_not?: String | null
+  cartolaId_in?: String[] | String | null
+  cartolaId_not_in?: String[] | String | null
+  cartolaId_lt?: String | null
+  cartolaId_lte?: String | null
+  cartolaId_gt?: String | null
+  cartolaId_gte?: String | null
+  cartolaId_contains?: String | null
+  cartolaId_not_contains?: String | null
+  cartolaId_starts_with?: String | null
+  cartolaId_not_starts_with?: String | null
+  cartolaId_ends_with?: String | null
+  cartolaId_not_ends_with?: String | null
   cartolaName?: String | null
   cartolaName_not?: String | null
   cartolaName_in?: String[] | String | null
@@ -6316,6 +7643,12 @@ export interface UserCreateInput {
   deleted?: Boolean | null
   team: TeamCreateOneWithoutOwnerInput
   wallet: WalletCreateOneWithoutUserInput
+  cards?: CardCreateManyWithoutUserInput | null
+}
+
+export interface UserCreateOneWithoutCardsInput {
+  create?: UserCreateWithoutCardsInput | null
+  connect?: UserWhereUniqueInput | null
 }
 
 export interface UserCreateOneWithoutTeamInput {
@@ -6328,6 +7661,16 @@ export interface UserCreateOneWithoutWalletInput {
   connect?: UserWhereUniqueInput | null
 }
 
+export interface UserCreateWithoutCardsInput {
+  id?: UUID | null
+  email: String
+  globoToken?: String | null
+  password: String
+  deleted?: Boolean | null
+  team: TeamCreateOneWithoutOwnerInput
+  wallet: WalletCreateOneWithoutUserInput
+}
+
 export interface UserCreateWithoutTeamInput {
   id?: UUID | null
   email: String
@@ -6335,6 +7678,7 @@ export interface UserCreateWithoutTeamInput {
   password: String
   deleted?: Boolean | null
   wallet: WalletCreateOneWithoutUserInput
+  cards?: CardCreateManyWithoutUserInput | null
 }
 
 export interface UserCreateWithoutWalletInput {
@@ -6344,6 +7688,7 @@ export interface UserCreateWithoutWalletInput {
   password: String
   deleted?: Boolean | null
   team: TeamCreateOneWithoutOwnerInput
+  cards?: CardCreateManyWithoutUserInput | null
 }
 
 export interface UserSubscriptionWhereInput {
@@ -6364,6 +7709,7 @@ export interface UserUpdateInput {
   deleted?: Boolean | null
   team?: TeamUpdateOneRequiredWithoutOwnerInput | null
   wallet?: WalletUpdateOneRequiredWithoutUserInput | null
+  cards?: CardUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateManyMutationInput {
@@ -6371,6 +7717,13 @@ export interface UserUpdateManyMutationInput {
   globoToken?: String | null
   password?: String | null
   deleted?: Boolean | null
+}
+
+export interface UserUpdateOneRequiredWithoutCardsInput {
+  create?: UserCreateWithoutCardsInput | null
+  connect?: UserWhereUniqueInput | null
+  update?: UserUpdateWithoutCardsDataInput | null
+  upsert?: UserUpsertWithoutCardsInput | null
 }
 
 export interface UserUpdateOneRequiredWithoutTeamInput {
@@ -6389,12 +7742,22 @@ export interface UserUpdateOneWithoutWalletInput {
   upsert?: UserUpsertWithoutWalletInput | null
 }
 
+export interface UserUpdateWithoutCardsDataInput {
+  email?: String | null
+  globoToken?: String | null
+  password?: String | null
+  deleted?: Boolean | null
+  team?: TeamUpdateOneRequiredWithoutOwnerInput | null
+  wallet?: WalletUpdateOneRequiredWithoutUserInput | null
+}
+
 export interface UserUpdateWithoutTeamDataInput {
   email?: String | null
   globoToken?: String | null
   password?: String | null
   deleted?: Boolean | null
   wallet?: WalletUpdateOneRequiredWithoutUserInput | null
+  cards?: CardUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateWithoutWalletDataInput {
@@ -6403,6 +7766,12 @@ export interface UserUpdateWithoutWalletDataInput {
   password?: String | null
   deleted?: Boolean | null
   team?: TeamUpdateOneRequiredWithoutOwnerInput | null
+  cards?: CardUpdateManyWithoutUserInput | null
+}
+
+export interface UserUpsertWithoutCardsInput {
+  update: UserUpdateWithoutCardsDataInput
+  create: UserCreateWithoutCardsInput
 }
 
 export interface UserUpsertWithoutTeamInput {
@@ -6485,6 +7854,9 @@ export interface UserWhereInput {
   deleted_not?: Boolean | null
   team?: TeamWhereInput | null
   wallet?: WalletWhereInput | null
+  cards_every?: CardWhereInput | null
+  cards_some?: CardWhereInput | null
+  cards_none?: CardWhereInput | null
 }
 
 export interface UserWhereUniqueInput {
@@ -6706,6 +8078,10 @@ export interface Node {
   id: ID_Output
 }
 
+export interface AggregateCard {
+  count: Int
+}
+
 export interface AggregateLeague {
   count: Int
 }
@@ -6748,6 +8124,57 @@ export interface AggregateWallet {
 
 export interface BatchPayload {
   count: Long
+}
+
+export interface Card {
+  id: UUID
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+  user: User
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface CardConnection {
+  pageInfo: PageInfo
+  edges: Array<CardEdge | null>
+  aggregate: AggregateCard
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface CardEdge {
+  node: Card
+  cursor: String
+}
+
+export interface CardPreviousValues {
+  id: UUID
+  pagarmeId: String
+  brand: String
+  holderName: String
+  firstDigits: String
+  lastDigits: String
+  fingerprint: String
+  valid: Boolean
+  expirationDate: String
+}
+
+export interface CardSubscriptionPayload {
+  mutation: MutationType
+  node?: Card | null
+  updatedFields?: Array<String> | null
+  previousValues?: CardPreviousValues | null
 }
 
 export interface League {
@@ -6996,6 +8423,7 @@ export interface SeasonSubscriptionPayload {
 export interface Team {
   id: UUID
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar?: String | null
@@ -7071,6 +8499,7 @@ export interface TeamEnrollmentSubscriptionPayload {
 export interface TeamPreviousValues {
   id: UUID
   name: String
+  cartolaId: String
   cartolaName: String
   cartolaSlug: String
   avatar?: String | null
@@ -7138,6 +8567,7 @@ export interface User {
   createdAt: DateTime
   updatedAt: DateTime
   deleted: Boolean
+  cards?: Array<Card> | null
 }
 
 /*

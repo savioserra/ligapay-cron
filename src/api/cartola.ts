@@ -16,12 +16,12 @@ export async function getCurrentRound(): Promise<number | null> {
   }
 }
 
-export async function getTeamScores(teamSlug: string): Promise<Array<{ round: number; score: number } | null>> {
+export async function getTeamScores(teamId: string): Promise<Array<{ round: number; score: number } | null>> {
   const round = await getCurrentRound();
 
   const scores = await Promise.all(
     range(1, round + 1).map(async (round: number) => {
-      const { data } = await axiosInstance.get(`time/slug/${teamSlug}/${round}`);
+      const { data } = await axiosInstance.get(`time/id/${teamId}/${round}`);
       const { pontos } = data;
 
       return pontos ? { round, score: pontos } : null;

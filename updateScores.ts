@@ -14,16 +14,23 @@ const main = async () => {
   if (!currentRound) {
     return;
   }
-  
+
+  console.info(`LAST CLOSED ROUND: ${currentRound}`);
+
   const [currentSeason] = await prisma.query.seasons({ where: { current: true } });
 
+  console.info(`CURRENT SEASON: ${currentSeason.name}`);
+
   const teams = await prisma.query.teams(
-    { where: { scores_none: { AND: { round_not: currentRound, season: { id_not: currentSeason.id } } } } },
-    `{ cartolaSlug, id, scores(where: { season: { name: "${currentSeason.name}"} }) { round } }`
+    { where: { scores_none: { AND: { round: currentRound, season: { id: currentSeason.id } } } } },
+    `{ cartolaId, id, scores(where: { season: { id: "${currentSeason.id}"} }) { round } }`
   );
 
-  for (const { cartolaSlug, id, scores } of teams) {
-    const cartolaScores = await getTeamScores(cartolaSlug);
+  console.info(`TEAMS TO UPDATE: ${teams.length}`);
+
+  for (const { cartolaId, id, scores } of teams) {
+
+    const cartolaScores = await getTeamScores(cartolaId);
     const missingRounds = differenceBy(cartolaScores, scores, "round");
 
     await prisma.mutation.updateTeam({
@@ -35,6 +42,8 @@ const main = async () => {
       }
     });
   }
+
+
 
   if (currentSeason.currentRound !== currentRound) {
     await prisma.mutation.updateSeason({ where: { id: currentSeason.id }, data: { currentRound } });
